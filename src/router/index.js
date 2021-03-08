@@ -10,25 +10,25 @@ const routes = [
     {
         path: '/',
         name: 'Login',
-        component: () => import('@/components/Login.vue'),
+        component: () => import('@/views/Login.vue'),
         meta: { bodyClass: 'type-signIn' },
     },
     {
         path: '/confirms',
         name: 'Confirms',
-        component: () => import('@/components/Confirms.vue'),
+        component: () => import('@/views/confirms/Confirms.vue'),
         meta: { bodyClass: 'type-contents' },
     },
     {
         path: '/confirms/adjustment',
         name: 'ConfirmsAdjustment',
-        component: () => import('@/components/ConfirmsAdjustment.vue'),
+        component: () => import('@/views/confirms/ConfirmsAdjustment.vue'),
         meta: { bodyClass: 'type-contents' },
     },
     {
         path: '/confirms/detail',
         name: 'ConfirmsDetail',
-        component: () => import('@/components/ConfirmDetail.vue'),
+        component: () => import('@/views/confirms/ConfirmDetail.vue'),
         meta: { bodyClass: 'type-contents' },
     }
 ];
