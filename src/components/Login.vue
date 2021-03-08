@@ -15,18 +15,18 @@
           </div>
           <div class="custom-input">
             <div class="ui fluid large left icon input">
-              <input type="text" placeholder="Username">
+              <input type="text" placeholder="Username" v-model="id">
               <i class="user icon"></i>
             </div>
           </div>
           <div class="custom-input">
             <div class="ui fluid large left icon input">
-              <input type="password" placeholder="Password">
+              <input type="password" placeholder="Password" v-model="pwd">
               <i class="lock icon"></i>
             </div>
           </div>
           <div class="custom-login">
-            <div class="ui fluid huge primary button">
+            <div class="ui fluid huge primary button" @click="login">
               LOGIN
             </div>
           </div>
@@ -40,3 +40,22 @@
     </div>
   </div>
 </template>
+
+<script>
+import { loginApi } from '@/api';
+
+export default {
+  name: "Login",
+  data(){
+    return {
+      id: '',
+      pwd: ''
+    }
+  },
+  methods: {
+    login() {
+      loginApi.login(this.id, this.pwd)
+    }
+  }
+}
+</script>
