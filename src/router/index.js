@@ -12,6 +12,24 @@ const routes = [
         name: 'Login',
         component: () => import('@/components/Login.vue'),
         meta: { bodyClass: 'type-signIn' },
+    },
+    {
+        path: '/confirms',
+        name: 'Confirms',
+        component: () => import('@/components/Confirms.vue'),
+        meta: { bodyClass: 'type-contents' },
+    },
+    {
+        path: '/confirms/adjustment',
+        name: 'ConfirmsAdjustment',
+        component: () => import('@/components/ConfirmsAdjustment.vue'),
+        meta: { bodyClass: 'type-contents' },
+    },
+    {
+        path: '/confirms/detail',
+        name: 'ConfirmsDetail',
+        component: () => import('@/components/ConfirmDetail.vue'),
+        meta: { bodyClass: 'type-contents' },
     }
 ];
 
@@ -21,7 +39,7 @@ const router = new VueRouter({
     routes,
 });
 
-const vueBodyClass = new VueBodyClass(router);
+const vueBodyClass = new VueBodyClass(routes);
 
 
 router.beforeEach(async (to, from, next) => {
