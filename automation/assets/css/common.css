@@ -1,0 +1,66 @@
+/* Basic */
+html,
+body {width: 100%; height: 100%;}
+
+body {overflow-x: auto;}
+
+
+/* Sign In */
+.type-signIn .custom-wrapper {display: table; width: 100%; height: 100%;}
+.type-signIn .custom-outer {display: table-cell; text-align: center; vertical-align: middle;}
+.type-signIn .custom-inner {display: inline-block; width: 320px;}
+
+.type-signIn .custom-main {padding: 5px 0;}
+
+.type-signIn .custom-main .custom-header {padding: 5px 0 15px 0;}
+.type-signIn .custom-main .custom-header .ui.statistic .label {padding-top: 10px;}
+.type-signIn .custom-main .custom-input {padding: 5px 0;}
+.type-signIn .custom-main .custom-login {padding: 15px 0 5px 0;}
+.type-signIn .custom-main .custom-forget {padding: 5px 0;}
+
+
+/* Contents */
+.type-contents .custom-wrapper {box-sizing: border-box; min-width: 1260px; padding: 40px;}
+.type-contents .custom-wrapper::after {display: block; clear: both; height: 0; font-size: 0; line-height: 0; content: '';}
+
+.type-contents .custom-aside {float: left; width: 250px;}
+
+.type-contents .custom-main {float: left; width: calc(100% - 250px);}
+
+.type-contents .custom-main .custom-section {padding-top: 30px;}
+.type-contents .custom-main .custom-section:first-child {padding-top: 0;}
+
+.type-contents .custom-main .custom-section .custom-header {padding-bottom: 10px;}
+.type-contents .custom-main .custom-section .custom-header .ui.header {padding-bottom: 10px; font-weight: normal;}
+.type-contents .custom-main .custom-section .custom-header .ui.header::after {display: block; clear: both; height: 0; font-size: 0; line-height: 0; content: '';}
+.type-contents .custom-main .custom-section .custom-header .ui.header .custom-title {float: left;}
+.type-contents .custom-main .custom-section .custom-header .ui.header .custom-text {float: left; padding-left: 5px; font-size: 1.2rem;}
+
+.type-contents .custom-main .custom-section .custom-upload {padding: 10px 0;}
+.type-contents .custom-main .custom-section .custom-upload .ui.segment {display: flex; flex-direction: row;}
+.type-contents .custom-main .custom-section .custom-upload .ui.segment .custom-title {line-height: 38px;}
+.type-contents .custom-main .custom-section .custom-upload .ui.segment .custom-date {padding-left: 20px;}
+.type-contents .custom-main .custom-section .custom-upload .ui.segment .custom-file {flex: 1; padding-left: 10px;}
+.type-contents .custom-main .custom-section .custom-upload .ui.segment .custom-label {list-style: none; padding: 12px 0 ; margin: -2px;}
+.type-contents .custom-main .custom-section .custom-upload .ui.segment .custom-label > li {float: left; padding: 2px;}
+.type-contents .custom-main .custom-section .custom-upload .ui.segment .custom-save {padding-left: 10px;}
+
+.type-contents .custom-main .custom-section .custom-caption {padding-top: 10px;}
+.type-contents .custom-main .custom-section .custom-caption::after {display: block; clear: both; height: 0; font-size: 0; line-height: 0; content: '';}
+.type-contents .custom-main .custom-section .custom-caption .custom-delete {float: left;}
+.type-contents .custom-main .custom-section .custom-caption .custom-each {float: right;}
+
+.type-contents .custom-main .custom-section .custom-list {padding: 10px 0;}
+.type-contents .custom-main .custom-section .custom-list .ui.table colgroup col:nth-child(1) {width: 80px;}
+.type-contents .custom-main .custom-section .custom-list .ui.table colgroup col:nth-child(2) {width: 160px;}
+.type-contents .custom-main .custom-section .custom-list.shippingList-list .ui.table colgroup col:nth-child(3) {width: 240px;}
+.type-contents .custom-main .custom-section .custom-list .ui.table tr td {cursor: pointer;}
+.type-contents .custom-main .custom-section .custom-list .ui.table tr td .custom-label {list-style: none; padding: 2px 0; margin: -2px;}
+.type-contents .custom-main .custom-section .custom-list .ui.table tr td .custom-label > li {float: left; padding: 2px;}
+
+.type-contents .custom-main .custom-section .custom-paging {padding: 10px 0; text-align: center;}
+.type-contents .custom-main .custom-section .custom-paging .custom-container {display: inline-block;}
+
+.type-contents .custom-main .custom-section .custom-button {padding: 10px 0; text-align: right;}
+
+.type-contents .custom-main .custom-section .custom-calculate {text-align: center;}

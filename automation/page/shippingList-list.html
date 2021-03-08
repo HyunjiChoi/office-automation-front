@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index, follow" />
+  <meta name="keywords" content="template" />
+  <meta name="subject" content="template" />
+  <meta name="description" content="template" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    VC 정산 프로그램
+  </title>
+  <!-- Favicon -->
+  <link rel="stylesheet" type="text/css" href="../semantic.min.css">
+  <link rel="stylesheet" href="../assets/css/common.css" />
+  <link rel="stylesheet" href="../assets/css/page.css" />
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <script src="../semantic.min.js"></script>
+  <script src="../assets/js/common.js"></script>
+</head>
+<body class="type-contents">
+  <div class="custom-wrapper">
+    <aside class="custom-aside">
+      <div class="ui vertical menu">
+        <a class="item">
+          주문내역
+        </a>
+        <a class="active blue item">
+          출하 리스트
+        </a>
+        <a class="item">
+          구매 확정 리스트
+        </a>
+      </div>
+    </aside>
+    <main class="custom-main">
+      <section class="custom-section">
+        <div class="custom-header">
+          <h1 class="ui dividing header">
+            <div class="custom-title">
+              출하 리스트
+            </div>
+          </h1>
+        </div>
+        <div class="custom-upload">
+          <div class="ui segment">
+            <div class="custom-title">
+              파일 업로드
+            </div>
+            <div class="custom-date">
+              <div class="ui selection dropdown">
+                <input type="hidden" name="gender">
+                <i class="dropdown icon"></i>
+                <div class="default text">
+                  달력(연월)
+                </div>
+                <div class="menu">
+                  <div class="item">
+                    항목
+                  </div>
+                  <div class="item">
+                    항목
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="custom-file">
+              <div class="custom-input">
+                <div class="ui fluid action input">
+                  <input type="text" placeholder="선택된 파일 없음">
+                  <div class="ui button">
+                    파일선택
+                  </div>
+                </div>
+              </div>
+              <ul class="custom-label">
+                <li>
+                  <div class="ui label">
+                    11~12월 출하리스트.xslx
+                    <i class="delete icon"></i>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="custom-save">
+              <button class="ui primary button">
+                저장
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="custom-caption">
+          <div class="custom-delete">
+            <button class="ui button">
+              삭제
+            </button>
+          </div>
+          <div class="custom-each">
+            <div class="ui selection dropdown">
+              <input type="hidden" name="gender">
+              <i class="dropdown icon"></i>
+              <div class="default text">5개씩 보기</div>
+              <div class="menu">
+                <div class="item">항목</div>
+                <div class="item">항목</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="custom-list shippingList-list">
+          <table class="ui unstackable fixed selectable celled table">
+            <colgroup>
+              <col />
+              <col />
+              <col />
+              <col />
+            </colgroup>
+            <thead>
+            <tr class="center aligned">
+              <th></th>
+              <th>
+                정산날짜
+              </th>
+              <th>
+                출하리스트
+              </th>
+              <th>
+                쇼핑몰 명
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="center aligned">
+              <td>
+                <div class="ui checkbox">
+                  <input type="checkbox">
+                  <label></label>
+                </div>
+              </td>
+              <td>
+                2020년 12월
+              </td>
+              <td>
+                11~12월 출하리스트
+              </td>
+              <td>
+                <ul class="custom-label">
+                  <li>
+                    <div class="ui label">
+                      스토어팜
+                    </div>
+                  </li>
+                  <li>
+                    <div class="ui label">
+                      G마켓
+                    </div>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr class="center aligned">
+              <td>
+                <div class="ui checkbox">
+                  <input type="checkbox">
+                  <label></label>
+                </div>
+              </td>
+              <td>
+                2020년 12월
+              </td>
+              <td>
+                11~12월 출하리스트
+              </td>
+              <td>
+                <ul class="custom-label">
+                  <li>
+                    <div class="ui label">
+                      스토어팜
+                    </div>
+                  </li>
+                  <li>
+                    <div class="ui label">
+                      G마켓
+                    </div>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr class="center aligned">
+              <td>
+                <div class="ui checkbox">
+                  <input type="checkbox">
+                  <label></label>
+                </div>
+              </td>
+              <td>
+                2020년 12월
+              </td>
+              <td>
+                11~12월 출하리스트
+              </td>
+              <td>
+                <ul class="custom-label">
+                  <li>
+                    <div class="ui label">
+                      스토어팜
+                    </div>
+                  </li>
+                  <li>
+                    <div class="ui label">
+                      G마켓
+                    </div>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="custom-paging">
+          <div class="custom-container">
+            <div class="ui pagination menu">
+              <a class="icon item">
+                <i class="left chevron icon"></i>
+              </a>
+              <a class="active item">
+                1
+              </a>
+              <a class="item">
+                2
+              </a>
+              <a class="item">
+                3
+              </a>
+              <a class="item">
+                4
+              </a>
+              <a class="item">
+                5
+              </a>
+              <a class="icon item">
+                <i class="right chevron icon"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
