@@ -4,7 +4,7 @@
       <div class="custom-header">
         <h1 class="ui dividing header">
           <div class="custom-title">
-            구매 확정 리스트
+            판매 관리
           </div>
         </h1>
       </div>
@@ -44,31 +44,31 @@
           </tr>
           </thead>
           <tbody>
-          <tr v-for="confirm in confirmList" :key="confirm.noSo">
-            <td>{{ confirm.s }}</td>
-            <td>{{ confirm.noSo }}</td>
-            <td>{{ confirm.dtSo }}</td>
-            <td>{{ confirm.nmShop }}</td>
-            <td>{{ confirm.lnPartner }}</td>
-            <td>{{ confirm.noOrder }}</td>
-            <td>{{ confirm.cdSpitem }}</td>
-            <td>{{ confirm.nmSpitem }}</td>
-            <td>{{ confirm.cdOpt }}</td>
-            <td>{{ confirm.nmOpt }}</td>
-            <td>{{ confirm.nmCust }}</td>
-            <td>{{ confirm.qtSo }}</td>
-            <td>{{ confirm.umVat }}</td>
-            <td>{{ confirm.amVat }}</td>
-            <td>{{ confirm.cmVat }}</td>
-            <td>{{ confirm.caVat }}</td>
-            <td>{{ confirm.cm }}</td>
-            <td>{{ confirm.ca }}</td>
-            <td>{{ confirm.vat }}</td>
-            <td>{{ confirm.amRateCharge }}</td>
-            <td>{{ confirm.noGir }}</td>
-            <td>{{ confirm.payType }}</td>
-            <td>{{ confirm.noPo }}</td>
-            <td>{{ confirm.noGirMin }}</td>
+          <tr v-for="shipping in shippingList" :key="shipping.noSo">
+            <td>{{ shipping.s }}</td>
+            <td>{{ shipping.noSo }}</td>
+            <td>{{ shipping.dtSo }}</td>
+            <td>{{ shipping.nmShop }}</td>
+            <td>{{ shipping.lnPartner }}</td>
+            <td>{{ shipping.noOrder }}</td>
+            <td>{{ shipping.cdSpitem }}</td>
+            <td>{{ shipping.nmSpitem }}</td>
+            <td>{{ shipping.cdOpt }}</td>
+            <td>{{ shipping.nmOpt }}</td>
+            <td>{{ shipping.nmCust }}</td>
+            <td>{{ shipping.qtSo }}</td>
+            <td>{{ shipping.umVat }}</td>
+            <td>{{ shipping.amVat }}</td>
+            <td>{{ shipping.cmVat }}</td>
+            <td>{{ shipping.caVat }}</td>
+            <td>{{ shipping.cm }}</td>
+            <td>{{ shipping.ca }}</td>
+            <td>{{ shipping.vat }}</td>
+            <td>{{ shipping.amRateCharge }}</td>
+            <td>{{ shipping.noGir }}</td>
+            <td>{{ shipping.payType }}</td>
+            <td>{{ shipping.noPo }}</td>
+            <td>{{ shipping.noGirMin }}</td>
           </tr>
           </tbody>
         </table>
@@ -83,27 +83,24 @@
 </template>
 
 <script>
-import { confirmApi } from '@/api';
+import { shippingApi } from '@/api';
 
 export default {
-  name: "ConfirmsDetail",
+  name: "ShippingsDetail",
   created() {
-    const {calDt, nmShop} = this.$route.query
-    this.calDt = calDt;
-    this.nmShop = nmShop;
     this.setData()
   },
   data() {
     return {
-      confirmList: null,
-      calDt: '',
-      nmShop: ''
+      saleList: null,
+      calDt: '2021-03-01',
+      nmShop : '11번가'
     }
   },
   methods: {
     async setData() {
-      const {data} = await confirmApi.fetchConfirmDetail(this.calDt,this.nmShop)
-      this.confirmList = data
+      const {data} = await shippingApi.fetchShippingDetail(this.calDt, this.nmShop)
+      this.shippingList = data
     }
   }
 }

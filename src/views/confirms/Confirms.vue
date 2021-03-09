@@ -9,11 +9,11 @@
         </h1>
       </div>
       <div class="custom-caption">
-        <div class="custom-delete">
-          <button class="ui button">
-            삭제
-          </button>
-        </div>
+<!--        <div class="custom-delete">-->
+<!--          <button class="ui button">-->
+<!--            삭제-->
+<!--          </button>-->
+<!--        </div>-->
 <!--          <div class="custom-each">-->
 <!--            <div class="ui selection dropdown">-->
 <!--              <input type="hidden" name="gender">-->
@@ -29,13 +29,13 @@
       <div class="custom-list">
         <table class="ui unstackable fixed selectable celled table">
           <colgroup>
-            <col />
+<!--            <col />-->
             <col />
             <col />
           </colgroup>
           <thead>
           <tr class="center aligned">
-            <th></th>
+<!--            <th></th>-->
             <th>
               정산날짜
             </th>
@@ -46,21 +46,23 @@
           </thead>
           <tbody>
           <tr class="center aligned" v-for="confirm in confirmList" :key="confirm.calDt">
-            <td>
+<!--            <td>
               <div class="ui checkbox">
                 <input type="checkbox">
                 <label></label>
               </div>
-            </td>
+            </td>-->
             <td>
               {{ confirm.calDt }}
             </td>
             <td>
               <ul class="custom-label">
                 <li v-for="nmShop in parseNmShop(confirm.nmShop)" :key="nmShop">
-                  <div class="ui label">
-                    {{ nmShop }}
-                  </div>
+                  <router-link :to="`/confirms/detail?calDt=${confirm.calDt}&nmShop=${nmShop}`">
+                    <div class="ui label">
+                      {{ nmShop }}
+                    </div>
+                  </router-link>
                 </li>
               </ul>
             </td>

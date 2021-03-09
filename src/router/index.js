@@ -30,6 +30,30 @@ const routes = [
         name: 'ConfirmsDetail',
         component: () => import('@/views/confirms/ConfirmDetail.vue'),
         meta: { bodyClass: 'type-contents' },
+    },
+    {
+        path: '/sales',
+        name: 'Sales',
+        component: () => import('@/views/sales/Sales.vue'),
+        meta: { bodyClass: 'type-contents' },
+    },
+    {
+        path: '/sales/detail',
+        name: 'SalesDetail',
+        component: () => import('@/views/sales/SalesDetail.vue'),
+        meta: { bodyClass: 'type-contents' },
+    },
+    {
+        path: '/shippings',
+        name: 'Shipping',
+        component: () => import('@/views/shippings/Shipping.vue'),
+        meta: { bodyClass: 'type-contents' },
+    },
+    {
+        path: '/shippings/detail',
+        name: 'ShippingDetail',
+        component: () => import('@/views/shippings/ShippingDetail.vue'),
+        meta: { bodyClass: 'type-contents' },
     }
 ];
 
