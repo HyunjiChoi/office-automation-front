@@ -9,11 +9,11 @@
         </h1>
       </div>
       <div class="custom-caption">
-        <div class="custom-delete">
-          <button class="ui button">
-            삭제
-          </button>
-        </div>
+<!--        <div class="custom-delete">-->
+<!--          <button class="ui button">-->
+<!--            삭제-->
+<!--          </button>-->
+<!--        </div>-->
 <!--          <div class="custom-each">-->
 <!--            <div class="ui selection dropdown">-->
 <!--              <input type="hidden" name="gender">-->
@@ -58,9 +58,11 @@
             <td>
               <ul class="custom-label">
                 <li v-for="nmShop in parseNmShop(confirm.nmShop)" :key="nmShop">
-                  <div class="ui label">
-                    {{ nmShop }}
-                  </div>
+                  <router-link :to="`/confirms/detail?calDt=${confirm.calDt}&nmShop=${nmShop}`">
+                    <div class="ui label">
+                      {{ nmShop }}
+                    </div>
+                  </router-link>
                 </li>
               </ul>
             </td>

@@ -83,13 +83,16 @@ import { confirmApi } from '@/api';
 export default {
   name: "ConfirmsDetail",
   created() {
+    const {calDt, nmShop} = this.$route.query
+    this.calDt = calDt;
+    this.nmShop = nmShop;
     this.setData()
   },
   data() {
     return {
       confirmList: null,
-      calDt: '2021-03-01',
-      nmShop: '스토어팜'
+      calDt: '',
+      nmShop: ''
     }
   },
   methods: {

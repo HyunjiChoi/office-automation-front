@@ -33,7 +33,7 @@
           <tr class="center aligned" v-for="sale in sales" :key="sale.calDt">
             <td>
               <div class="ui checkbox">
-                <input type="checkbox">
+                <input type="radio" :value="sale.calDt" v-model="pickedSale">
                 <label></label>
               </div>
             </td>
@@ -58,7 +58,7 @@
       <div class="custom-header">
         <h1 class="ui dividing header">
           <div class="custom-title">
-            구매 확정 리스트
+            출하 리스트
           </div>
         </h1>
       </div>
@@ -88,7 +88,7 @@
           <tr class="center aligned" v-for="ship in shippings" :key="ship.calDt + ship.nmShop">
             <td>
               <div class="ui checkbox">
-                <input type="checkbox">
+                <input type="radio" :value="ship" v-model="pickedShip">
                 <label></label>
               </div>
             </td>
@@ -135,6 +135,8 @@ export default {
     return {
       sales: null,
       shippings: null,
+      pickedShip: null,
+      pickedSale: null,
     }
   },
   methods: {
