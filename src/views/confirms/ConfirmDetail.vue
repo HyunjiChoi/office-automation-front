@@ -102,8 +102,12 @@ export default {
   },
   methods: {
     async setData() {
-      const {data} = await confirmApi.fetchConfirmDetail(this.calDt,this.nmShop)
+      const { data } = await confirmApi.fetchConfirmDetail(this.calDt,this.nmShop)
       this.confirmList = data
+    },
+    async deleteConfirm() {
+      const { data } = await confirmApi.deleteConfirm()
+      console.log(data)
     }
   }
 }

@@ -84,11 +84,9 @@
           <colgroup>
             <col />
             <col />
-            <col />
           </colgroup>
           <thead>
           <tr class="center aligned">
-            <th></th>
             <th>
               정산날짜
             </th>
@@ -100,19 +98,15 @@
           <tbody>
           <tr class="center aligned" v-for="shipping in shippingList" :key="shipping.calDt">
             <td>
-              <div class="ui checkbox">
-                <input type="checkbox">
-                <label></label>
-              </div>
-            </td>
-            <td>
               {{ shipping.calDt }}
             </td>
             <td>
               <ul class="custom-label">
-                <li v-for="nmShop in parsenmShop(shipping.nmShop)" :key="nmShop">
+                <li v-for="nmShop in parseNmShop(shipping.nmShop)" :key="nmShop">
                   <div class="ui label">
+                    <router-link :to="`/shippings/detail?calDt=${shipping.calDt}&nmShop=${nmShop}`">
                     {{ nmShop }}
+                    </router-link>
                   </div>
                 </li>
               </ul>
@@ -129,7 +123,7 @@
 import {shippingApi} from '@/api';
 
 export default {
-  name: "Shippings",
+  name: "ShippingsDetail",
   created() {
     this.setData()
   },
@@ -143,7 +137,7 @@ export default {
       const { data } = await shippingApi.fetchShippingList()
       this.shippingList = data
     },
-    parselnPartner(nmShop) {
+    parseNmShop(nmShop) {
       return nmShop.split(' ').filter(el => el)
     }
   }

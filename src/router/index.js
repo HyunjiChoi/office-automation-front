@@ -51,7 +51,7 @@ const routes = [
     },
     {
         path: '/shippings/detail',
-        name: 'ShippingDetail',
+        name: 'ShippingsDetail',
         component: () => import('@/views/shippings/ShippingDetail.vue'),
         meta: { bodyClass: 'type-contents' },
     }

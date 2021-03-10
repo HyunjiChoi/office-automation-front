@@ -58,7 +58,7 @@
             </ul>-->
           </div>
           <div class="custom-save">
-            <button class="ui primary button">
+            <button v-on:click="registerSale" class="ui primary button">
               저장
             </button>
           </div>
@@ -101,7 +101,7 @@
           <tbody>
           <tr class="center aligned" v-for="sale in saleList" :key="sale.calDt">
             <td>
-              <router-link :to="`/sales/detail?calDt=${sale.calDt}&lnPartner=${lnPartner}`">
+              <router-link :to="`/sales/detail?calDt=${sale.calDt}`">
               {{ sale.calDt }}
               </router-link>
             </td>
@@ -132,7 +132,8 @@ export default {
   },
   data() {
     return {
-      saleList: null
+      saleList: null,
+      frontVideoFile: ''
     }
   },
   methods: {
@@ -142,6 +143,10 @@ export default {
     },
     parselnPartner(lnPartner) {
       return lnPartner.split(' ').filter(el => el)
+    },
+    async registerSale(){
+      const { data } = await saleApi.registerSale()
+      this.saleList = data
     }
   }
 }

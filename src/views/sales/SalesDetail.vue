@@ -9,7 +9,7 @@
         </h1>
       </div>
       <div class="custom-delete">
-        <button class="ui button">
+        <button v-on:click="deleteSale" class="ui button">
           삭제
         </button>
       </div>
@@ -37,7 +37,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr v-for="sale in saleList" :key="sale.noOrder">
+          <tr v-for="sale in saleList" :key="sale.noOrder+sale.nmSpitem+sale.sum+sale.nmCust">
             <td>{{ sale.calMonth }}</td>
             <td>{{ sale.calDay }}</td>
             <td>{{ sale.salesType }}</td>
@@ -53,7 +53,7 @@
             <td>{{ sale.price }}</td>
             <td>{{ sale.sum }}</td>
             <td>{{ sale.etc }}</td>
-            <td>{{ sale.nmcust }}</td>
+            <td>{{ sale.nmCust }}</td>
             <td>{{ sale.calWh }}</td>
           </tr>
           </tbody>
@@ -69,23 +69,28 @@
 </template>
 
 <script>
-import { saleApi } from '@/api';
+import {saleApi} from '@/api';
 
 export default {
   name: "SalesDetail",
   created() {
+    const {calDt} = this.$route.query
+    this.calDt = calDt;
     this.setData()
-    console.log('dd')
   },
   data() {
     return {
       saleList: null,
-      calDt: '2021-03-01'
+      calDt: ''
     }
   },
   methods: {
     async setData() {
       const {data} = await saleApi.fetchSaleDetail(this.calDt)
+      this.saleList = data
+    },
+    async deleteSale() {
+      const { data } = await saleApi.deleteSale(this.calDt)
       this.saleList = data
     }
   }

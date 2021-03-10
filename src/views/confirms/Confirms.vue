@@ -29,13 +29,13 @@
       <div class="custom-list">
         <table class="ui unstackable fixed selectable celled table">
           <colgroup>
-<!--            <col />-->
+<!--        <col />-->
             <col />
             <col />
           </colgroup>
           <thead>
           <tr class="center aligned">
-<!--            <th></th>-->
+<!--        <th></th>-->
             <th>
               정산날짜
             </th>
@@ -46,7 +46,7 @@
           </thead>
           <tbody>
           <tr class="center aligned" v-for="confirm in confirmList" :key="confirm.calDt">
-<!--            <td>
+  <!--      <td>
               <div class="ui checkbox">
                 <input type="checkbox">
                 <label></label>

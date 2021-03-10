@@ -9,7 +9,7 @@
         </h1>
       </div>
       <div class="custom-delete">
-        <button class="ui button">
+        <button v-on:click="deleteShipping" class="ui button">
           삭제
         </button>
       </div>
@@ -44,7 +44,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr v-for="shipping in shippingList" :key="shipping.noSo">
+          <tr v-for="shipping in shippingList" :key="shipping.noSo+shipping.nmSpitem+shipping.noSo+shipping.nmCust">
             <td>{{ shipping.s }}</td>
             <td>{{ shipping.noSo }}</td>
             <td>{{ shipping.dtSo }}</td>
@@ -73,33 +73,35 @@
           </tbody>
         </table>
       </div>
-      <div class="custom-button">
-        <button class="ui primary button">
-          파일 다운로드
-        </button>
-      </div>
     </section>
   </main>
 </template>
 
 <script>
-import { shippingApi } from '@/api';
+import {shippingApi} from '@/api';
 
 export default {
   name: "ShippingsDetail",
   created() {
+    const {calDt, nmShop} = this.$route.query
+    this.calDt = calDt;
+    this.nmShop = nmShop;
     this.setData()
   },
   data() {
     return {
-      saleList: null,
-      calDt: '2021-03-01',
-      nmShop : '11번가'
+      shippingList: null,
+      calDt: '',
+      nmShop : ''
     }
   },
   methods: {
     async setData() {
       const {data} = await shippingApi.fetchShippingDetail(this.calDt, this.nmShop)
+      this.shippingList = data
+    },
+    async deleteShipping() {
+      const { data } = await shippingApi.delteShipping(this.calDt, this.nmShop)
       this.shippingList = data
     }
   }

@@ -145,10 +145,6 @@ export default {
       this.sales = sales;
       this.shippings = shippings;
     },
-    async deleteConfirm() {
-      const { data } = await confirmApi.deleteConfirm()
-      console.log(data)
-    },
     parseNmShop(lnPartner) {
       return lnPartner.split(' ').filter(el => el)
     }

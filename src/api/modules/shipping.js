@@ -5,7 +5,11 @@ function fetchShippingList() {
 }
 
 function deleteShipping(calDt,nmShop) {
-    return http.delete('/shippings',{ calDt, nmShop });
+    return http.delete(`/shippings/detail?calDt=${calDt}&nmShop=${nmShop}`);
+}
+
+function registerSale(calDt, frontVideofile){
+    return http.post('/sales', {calDt, frontVideofile})
 }
 
 function fetchShippingDetail(calDt,nmShop) {
@@ -16,5 +20,6 @@ function fetchShippingDetail(calDt,nmShop) {
 export default {
     fetchShippingList,
     deleteShipping,
+    registerSale,
     fetchShippingDetail
 }

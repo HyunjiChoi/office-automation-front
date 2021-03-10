@@ -5,7 +5,11 @@ function fetchSaleList() {
 }
 
 function deleteSale(calDt) {
-    return http.delete('/sales',{calDt});
+    return http.delete(`/sales/detail?calDt=${calDt}`);
+}
+
+function registerSale(calDt, frontVideofile){
+    return http.post('/sales', {calDt, frontVideofile})
 }
 
 function fetchSaleDetail(calDt) {
@@ -16,5 +20,6 @@ function fetchSaleDetail(calDt) {
 export default {
     fetchSaleList,
     deleteSale,
+    registerSale,
     fetchSaleDetail
 }
