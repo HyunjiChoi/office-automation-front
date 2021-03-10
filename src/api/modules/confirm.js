@@ -5,7 +5,7 @@ function fetchConfirmList() {
 }
 
 function deleteConfirm(calDt,nmShop) {
-    return http.delete('/confirms',{ calDt, nmShop });
+    return http.delete(`/confirms/detail?calDt=${calDt}&nmShop=${nmShop}`);
 }
 
 function fetchConfirmAdjustmentList() {

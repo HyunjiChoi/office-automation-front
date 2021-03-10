@@ -4,7 +4,7 @@
       <div class="custom-header">
         <h1 class="ui dividing header">
           <div class="custom-title">
-            판매 관리
+            {{ nmShop }} 출하리스트
           </div>
         </h1>
       </div>
@@ -57,13 +57,13 @@
             <td>{{ shipping.nmOpt }}</td>
             <td>{{ shipping.nmCust }}</td>
             <td>{{ shipping.qtSo }}</td>
-            <td>{{ shipping.umVat }}</td>
-            <td>{{ shipping.amVat }}</td>
-            <td>{{ shipping.cmVat }}</td>
-            <td>{{ shipping.caVat }}</td>
-            <td>{{ shipping.cm }}</td>
-            <td>{{ shipping.ca }}</td>
-            <td>{{ shipping.vat }}</td>
+            <td class="price">{{ shipping.umVat | commaFilter }}</td>
+            <td class="price">{{ shipping.amVat | commaFilter }}</td>
+            <td class="price">{{ shipping.cmVat | commaFilter }}</td>
+            <td class="price">{{ shipping.caVat | commaFilter }}</td>
+            <td class="price">{{ shipping.cm | commaFilter}}</td>
+            <td class="price">{{ shipping.ca | commaFilter}}</td>
+            <td class="price">{{ shipping.vat | commaFilter }}</td>
             <td>{{ shipping.amRateCharge }}</td>
             <td>{{ shipping.noGir }}</td>
             <td>{{ shipping.payType }}</td>
@@ -101,8 +101,14 @@ export default {
       this.shippingList = data
     },
     async deleteShipping() {
-      const { data } = await shippingApi.delteShipping(this.calDt, this.nmShop)
+      if (!confirm('삭제하시겠습니까?')) return;
+      const { data } = await shippingApi.deleteShipping(this.calDt, this.nmShop)
       this.shippingList = data
+    }
+  },
+  filters: {
+    commaFilter(val) {
+      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
   }
 }

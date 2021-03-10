@@ -4,7 +4,7 @@
       <div class="custom-header">
         <h1 class="ui dividing header">
           <div class="custom-title">
-            판매 관리
+            {{calDt}} 판매 관리
           </div>
         </h1>
       </div>
@@ -45,13 +45,13 @@
             <td>{{ sale.noOrder }}</td>
             <td>{{ sale.lnPartner }}</td>
             <td>{{ sale.nmSpitem }}</td>
-            <td>{{ sale.cm }}</td>
+            <td class="price">{{ sale.cm | commaFilter }}</td>
             <td>{{ sale.color }}</td>
             <td>{{ sale.qtSo }}</td>
-            <td>{{ sale.ca }}</td>
-            <td>{{ sale.vat }}</td>
-            <td>{{ sale.price }}</td>
-            <td>{{ sale.sum }}</td>
+            <td class="price">{{ sale.ca | commaFilter }}</td>
+            <td class="price">{{ sale.vat | commaFilter }}</td>
+            <td class="price">{{ sale.price | commaFilter }}</td>
+            <td class="price">{{ sale.sum | commaFilter }}</td>
             <td>{{ sale.etc }}</td>
             <td>{{ sale.nmCust }}</td>
             <td>{{ sale.calWh }}</td>
@@ -90,8 +90,14 @@ export default {
       this.saleList = data
     },
     async deleteSale() {
-      const { data } = await saleApi.deleteSale(this.calDt)
-      this.saleList = data
+      if (!confirm('삭제하시겠습니까?')) return;
+        const {data} = await saleApi.deleteSale(this.calDt)
+        this.saleList = data
+    }
+  },
+  filters: {
+    commaFilter(val) {
+      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
   }
 }

@@ -4,12 +4,12 @@
       <div class="custom-header">
         <h1 class="ui dividing header">
           <div class="custom-title">
-            {{ nmShop }} 구매 확정 리스트
-          </div>
+          {{ nmShop }} 구매 확정 리스트
+      </div>
         </h1>
       </div>
       <div class="custom-delete">
-        <button class="ui button">
+        <button v-on:click="deleteConfirm" class="ui button">
           삭제
         </button>
       </div>
@@ -44,7 +44,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr v-for="confirm in confirmList" :key="confirm.noSo">
+          <tr v-for="confirm in confirmList" :key="confirm.noSo+confirm.nmSpitem+confirm.noSo+confirm.nmCust">
             <td>{{ confirm.s }}</td>
             <td>{{ confirm.noSo }}</td>
             <td>{{ confirm.dtSo }}</td>
@@ -106,14 +106,15 @@ export default {
       this.confirmList = data
     },
     async deleteConfirm() {
-      const { data } = await confirmApi.deleteConfirm()
-      console.log(data)
+      if (!confirm('삭제하시겠습니까?')) return;
+        const { data } = await confirmApi.deleteConfirm(this.calDt, this.nmShop)
+        this.confirmList = data
     }
   },
   filters: {
     commaFilter(val) {
       return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    },
+    }
   }
 }
 </script>
