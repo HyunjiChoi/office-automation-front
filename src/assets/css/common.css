@@ -50,11 +50,13 @@ body {overflow-x: auto;}
 .type-contents .custom-main .custom-section .custom-caption .custom-delete {float: left;}
 .type-contents .custom-main .custom-section .custom-caption .custom-each {float: right;}
 
-.type-contents .custom-main .custom-section .custom-list {padding: 10px 0;}
+.type-contents .custom-main .custom-section .custom-list {padding: 10px 0; overflow-x: auto;}
 .type-contents .custom-main .custom-section .custom-list .ui.table colgroup col:nth-child(1) {width: 80px;}
 .type-contents .custom-main .custom-section .custom-list .ui.table colgroup col:nth-child(2) {width: 160px;}
 .type-contents .custom-main .custom-section .custom-list.shippingList-list .ui.table colgroup col:nth-child(3) {width: 240px;}
+.type-contents .custom-main .custom-section .custom-list .ui.table tr {white-space: pre;}
 .type-contents .custom-main .custom-section .custom-list .ui.table tr td {cursor: pointer;}
+.type-contents .custom-main .custom-section .custom-list .ui.table tr td.price {text-align: right;}
 .type-contents .custom-main .custom-section .custom-list .ui.table tr td .custom-label {list-style: none; padding: 2px 0; margin: -2px;}
 .type-contents .custom-main .custom-section .custom-list .ui.table tr td .custom-label > li {float: left; padding: 2px;}
 

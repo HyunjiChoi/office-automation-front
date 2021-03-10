@@ -4,7 +4,7 @@
       <div class="custom-header">
         <h1 class="ui dividing header">
           <div class="custom-title">
-            구매 확정 리스트
+            {{ nmShop }} 구매 확정 리스트
           </div>
         </h1>
       </div>
@@ -52,13 +52,13 @@
             <td>{{ confirm.nmOpt }}</td>
             <td>{{ confirm.nmCust }}</td>
             <td>{{ confirm.qtSo }}</td>
-            <td>{{ confirm.umVat }}</td>
-            <td>{{ confirm.amVat }}</td>
-            <td>{{ confirm.cmVat }}</td>
-            <td>{{ confirm.caVat }}</td>
-            <td>{{ confirm.cm }}</td>
-            <td>{{ confirm.ca }}</td>
-            <td>{{ confirm.vat }}</td>
+            <td class="price">{{ confirm.umVat | commaFilter }}</td>
+            <td class="price">{{ confirm.amVat | commaFilter }}</td>
+            <td class="price">{{ confirm.cmVat | commaFilter }}</td>
+            <td class="price">{{ confirm.caVat | commaFilter }}</td>
+            <td class="price">{{ confirm.cm | commaFilter}}</td>
+            <td class="price">{{ confirm.ca | commaFilter}}</td>
+            <td class="price">{{ confirm.vat | commaFilter }}</td>
             <td>{{ confirm.amRateCharge }}</td>
             <td>{{ confirm.noGir }}</td>
             <td>{{ confirm.payType }}</td>
@@ -100,6 +100,11 @@ export default {
       const {data} = await confirmApi.fetchConfirmDetail(this.calDt,this.nmShop)
       this.confirmList = data
     }
+  },
+  filters: {
+    commaFilter(val) {
+      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    },
   }
 }
 </script>
