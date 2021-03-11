@@ -33,8 +33,9 @@
           <div class="custom-file">
             <div class="custom-input">
               <div class="ui fluid action input">
-                <input type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" ref="files">
-                <div class="ui button">
+                <input type="text" v-model="fileName" placeholder="선택된 파일이 없습니다." readonly>
+                <input type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" @change="getFileName" ref="files" hidden>
+                <div class="ui button" @click="selectFile">
                   파일선택
                 </div>
               </div>
@@ -122,10 +123,11 @@
 <script>
 import {shippingApi} from '@/api';
 import fileMixin from "@/mixins/fileMixin";
+import validation from "@/mixins/validation";
 
 export default {
   name: "ShippingsDetail",
-  mixins: [fileMixin],
+  mixins: [fileMixin,validation],
   created() {
     this.setData()
   },
@@ -145,12 +147,15 @@ export default {
     },
     async registerShipping(){
       const file = this.getFile();
-      if(!file) return;
+      if(!file || !this.validateDate(this.inputCalDt)) return;
       const formData = new FormData();
       formData.append('calDt', this.inputCalDt);
       formData.append('frontVideoFile', file);
-      await shippingApi.createSipping(formData);
-      await this.setData();
+      const { data } = await shippingApi.createSipping(formData);
+      this.shippingList = data;
+      this.inputCalDt = '';
+      this.$refs.files.value = null;
+      this.getFileName();
     }
   }
 }

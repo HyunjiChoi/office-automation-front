@@ -1,6 +1,6 @@
 import axios from 'axios';
 import store from '@/store';
-// import { loginApi } from '@/api';
+import { loginApi } from '@/api';
 
 const http = axios.create({
     baseURL: `${process.env.VUE_APP_API_URL}/vc-settlement/v1`,
@@ -25,12 +25,16 @@ http.interceptors.response.use((response) => {
     } = response;
     if(!error) return response;
     switch (code) {
+        case 110:
+            store._vm.$EventBus.$emit('sessionExpired');
+            break;
         case 401:
             throw new Error(JSON.stringify(error));
         default:
     }
     throw new Error(error.message);
-}, async (error) => {
+    },
+    async (error) => {
     if (axios.isCancel(error)) return Promise.reject(error);
     if (!error.response) return Promise.reject(error);
 
@@ -54,7 +58,7 @@ http.interceptors.response.use((response) => {
                     },
                     request: { responseURL },
                 } = error;
-                const url = responseURL.substr(process.env.VUE_APP_API_URL.length);
+                const url = responseURL.substr(`${process.env.VUE_APP_API_URL}/vc-settlement/v1`.length);
 
                 return http({
                     method,
@@ -63,8 +67,29 @@ http.interceptors.response.use((response) => {
                     params: method.toLowerCase() === 'get' ? data : undefined,
                 });
             };
+
+            let date = new Date();
+            date.setDate(date.getDate() - 1);
+            document.cookie = `refreshToken=0;expires=${date.toUTCString()};path=/;`;
+
+            const {
+                data: {
+                    success: { accessToken, refreshToken: newRefreshToken },
+                },
+            } = await loginApi.refreshSession(refreshToken);
+
+            date = new Date();
+            date.setTime(date.getTime() + 60 * 60 * 60 * 24 * 1000);
+            document.cookie = `refreshToken=${newRefreshToken};expires=${date.toUTCString()};path=/;`;
+            localStorage.setItem('accessToken', accessToken);
+            store.commit('setAccessToken', accessToken);
+
+            return retry();
         }
+        default:
+            break;
     }
+    return Promise.reject(error);
 });
 
 export default http;

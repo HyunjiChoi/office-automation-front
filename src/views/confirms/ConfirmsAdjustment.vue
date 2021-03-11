@@ -30,7 +30,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr class="center aligned" v-for="sale in sales" :key="sale.calDt">
+          <tr class="center aligned" v-for="sale in sales" :key="sale.calDt" @click="pickedSale = sale.calDt">
             <td>
               <div class="ui checkbox">
                 <input type="radio" :value="sale.calDt" v-model="pickedSale">
@@ -85,11 +85,11 @@
           </tr>
           </thead>
           <tbody>
-          <tr class="center aligned" v-for="ship in shippings" :key="ship.calDt + ship.nmShop">
+          <tr class="center aligned" v-for="ship in shippings" :key="ship.calDt + ship.nmShop" @click="pickedShip = ship">
             <td>
               <div class="ui checkbox">
                 <input type="radio" :value="ship" v-model="pickedShip">
-                <label></label>c
+                <label></label>
               </div>
             </td>
             <td>
@@ -114,11 +114,9 @@
     </section>
     <section class="custom-section">
       <div class="custom-calculate">
-        <router-link to="/confirms">
-          <button v-on:click="confirm" class="ui huge primary button">
-            정산
-          </button>
-        </router-link>
+        <button v-on:click="confirm" class="ui huge primary button">
+          정산
+        </button>
       </div>
     </section>
   </main>
@@ -151,12 +149,18 @@ export default {
       return lnPartner.split(' ').filter(el => el)
     },
     async confirm(){
+      if(!this.pickedSale || !this.pickedShip) {
+        alert('정산 할 항목을 선택해 주세요.')
+        return;
+      }
+      if (!confirm('정산하시겠습니까?')) return;
       const confirmInfo = {
         calDtSal: this.pickedSale,
         calDtSh: this.pickedShip.calDt,
         nmShop: this.pickedShip.nmShop
       }
       await confirmApi.postConfirmAdjustment(confirmInfo)
+      this.moveMenu('/confirms')
     }
   }
 }

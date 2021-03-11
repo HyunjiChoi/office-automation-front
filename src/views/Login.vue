@@ -58,8 +58,10 @@ export default {
       const date = new Date();
       date.setTime(date.getTime() + 60 * 60 * 60 * 24 * 1000);
       document.cookie = `refreshToken=${refreshToken};expires=${date.toUTCString()};path=/;`;
-      document.cookie = `keepLogin=1;expires=${date.toUTCString()}`;
       this.moveMenu('/sales')
+    },
+    moveMenu(path) {
+      if (this.$route.path !== path) this.$router.push(path);
     }
   }
 }

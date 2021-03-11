@@ -13,6 +13,11 @@ import "@/assets/css/semantic.min.css";
 // Js
 // import '@/assets/js/semantic.min';
 
+Vue.config.errorHandler = (err) => {
+  console.log(err)
+  if (!err.message) return;
+};
+
 Vue.prototype.$EventBus = new Vue();
 
 new Vue({
