@@ -89,7 +89,7 @@
             <td>
               <div class="ui checkbox">
                 <input type="radio" :value="ship" v-model="pickedShip">
-                <label></label>
+                <label></label>c
               </div>
             </td>
             <td>
@@ -114,9 +114,11 @@
     </section>
     <section class="custom-section">
       <div class="custom-calculate">
-        <button class="ui huge primary button">
-          정산
-        </button>
+        <router-link to="/confirms">
+          <button v-on:click="confirm" class="ui huge primary button">
+            정산
+          </button>
+        </router-link>
       </div>
     </section>
   </main>
@@ -147,6 +149,14 @@ export default {
     },
     parseNmShop(lnPartner) {
       return lnPartner.split(' ').filter(el => el)
+    },
+    async confirm(){
+      const confirmInfo = {
+        calDtSal: this.pickedSale,
+        calDtSh: this.pickedShip.calDt,
+        nmShop: this.pickedShip.nmShop
+      }
+      await confirmApi.postConfirmAdjustment(confirmInfo)
     }
   }
 }

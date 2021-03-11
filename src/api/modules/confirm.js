@@ -12,6 +12,10 @@ function fetchConfirmAdjustmentList() {
     return http.get('/confirms/adjustment');
 }
 
+function postConfirmAdjustment(confirmInfo){
+    return http.post('/confirms/adjustment',confirmInfo);
+}
+
 function fetchConfirmDetail(calDt,nmShop) {
     return http.get(`/confirms/detail?calDt=${calDt}&nmShop=${nmShop}`);
 }
@@ -21,5 +25,6 @@ export default {
     fetchConfirmList,
     deleteConfirm,
     fetchConfirmAdjustmentList,
+    postConfirmAdjustment,
     fetchConfirmDetail
 }
