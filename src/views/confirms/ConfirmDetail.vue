@@ -74,7 +74,7 @@
         </table>
       </div>
       <div class="custom-button">
-        <button class="ui primary button">
+        <button class="ui primary button" @click="downExcel">
           파일 다운로드
         </button>
       </div>
@@ -84,6 +84,7 @@
 
 <script>
 import { confirmApi } from '@/api';
+import fileSaver from "@/util/fileSaver";
 
 export default {
   name: "ConfirmsDetail",
@@ -107,8 +108,12 @@ export default {
     },
     async deleteConfirm() {
       if (!confirm('삭제하시겠습니까?')) return;
-        const { data } = await confirmApi.deleteConfirm(this.calDt, this.nmShop)
-        this.confirmList = data
+      await confirmApi.deleteConfirm(this.calDt, this.nmShop)
+      alert('삭제되었습니다.')
+      this.moveMenu('/confirms')
+    },
+    async downExcel(){
+      fileSaver.downloadExcelFile(await confirmApi.fetchConfirmsXlsx(this.calDt, this.nmShop), `${this.nmShop} 구매확정리스트.xlsx`)
     }
   },
   filters: {

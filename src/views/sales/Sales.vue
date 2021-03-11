@@ -18,7 +18,7 @@
           </div>
           <div class="custom-date">
             <div class="ui selection input">
-              <input type="text" name="gender">
+              <input type="text" placeholder="0000-00-00" v-model="inputCalDt">
 <!--              <i class="dropdown icon"></i>-->
 <!--              <div class="default text">-->
 <!--                달력(연월)-->
@@ -36,7 +36,7 @@
           <div class="custom-file">
             <div class="custom-input">
               <div class="ui fluid action input">
-                <input type="file" >
+                <input type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" ref="files">
                 <div class="ui button">
                   파일선택
                 </div>
@@ -58,7 +58,7 @@
             </ul>-->
           </div>
           <div class="custom-save">
-            <button v-on:click="registerSale" class="ui primary button">
+            <button class="ui primary button" @click="registerSale">
               저장
             </button>
           </div>
@@ -99,11 +99,9 @@
           </tr>
           </thead>
           <tbody>
-          <tr class="center aligned" v-for="sale in saleList" :key="sale.calDt">
+          <tr class="center aligned" v-for="sale in saleList" :key="sale.calDt" @click="moveMenu(`/sales/detail?calDt=${sale.calDt}`)">
             <td>
-              <router-link :to="`/sales/detail?calDt=${sale.calDt}`">
               {{ sale.calDt }}
-              </router-link>
             </td>
             <td>
               <ul class="custom-label">
@@ -124,15 +122,18 @@
 
 <script>
 import {saleApi} from '@/api';
+import fileMixin from "@/mixins/fileMixin";
 
 export default {
   name: "Sales",
+  mixins: [fileMixin],
   created() {
     this.setData()
   },
   data() {
     return {
       saleList: null,
+      inputCalDt: '',
       frontVideoFile: ''
     }
   },
@@ -145,9 +146,14 @@ export default {
       return lnPartner.split(' ').filter(el => el)
     },
     async registerSale(){
-      const { data } = await saleApi.registerSale()
-      this.saleList = data
-    }
+      const file = this.getFile();
+      if(!file) return;
+      const formData = new FormData();
+      formData.append('calDt', this.inputCalDt);
+      formData.append('frontVideoFile', file);
+      await saleApi.createSale(formData);
+      await this.setData();
+    },
   }
 }
 </script>

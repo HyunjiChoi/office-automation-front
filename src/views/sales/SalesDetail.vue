@@ -60,7 +60,7 @@
         </table>
       </div>
       <div class="custom-button">
-        <button class="ui primary button">
+        <button class="ui primary button"  @click="downExcel">
           파일 다운로드
         </button>
       </div>
@@ -70,6 +70,7 @@
 
 <script>
 import {saleApi} from '@/api';
+import fileSaver from "@/util/fileSaver";
 
 export default {
   name: "SalesDetail",
@@ -91,8 +92,12 @@ export default {
     },
     async deleteSale() {
       if (!confirm('삭제하시겠습니까?')) return;
-        const {data} = await saleApi.deleteSale(this.calDt)
-        this.saleList = data
+      await saleApi.deleteSale(this.calDt)
+      alert('삭제되었습니다.')
+      this.moveMenu('/sales')
+    },
+    async downExcel(){
+      fileSaver.downloadExcelFile(await saleApi.fetchSalesXlsx(this.calDt), `${this.calDt} 판매관리.xlsx`)
     }
   },
   filters: {

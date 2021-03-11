@@ -1,6 +1,6 @@
 <template>
   <div class="custom-wrapper">
-    <Left  v-if="$route.path !== '/'" />
+    <Left  v-if="$route.path !== '/login'" />
     <router-view></router-view>
   </div>
 </template>
@@ -13,6 +13,12 @@ export default Vue.extend({
   name: 'App',
   components: {
     Left,
+  },
+  created() {
+    this.$EventBus.$on('sessionExpired', () => {
+      this.$store.dispatch('deleteToken');
+      this.$router.push('/login');
+    });
   },
   data: () => ({
     //

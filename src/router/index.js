@@ -1,60 +1,71 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueBodyClass from 'vue-body-class';
-// import store from '@/store';
-
+import store from '@/store';
+import Login from "@/views/Login";
+import Sales from "@/views/sales/Sales";
+import SalesDetail from "@/views/sales/SalesDetail";
+import Shipping from "@/views/shippings/Shipping";
+import ShippingDetail from "@/views/shippings/ShippingDetail";
+import Confirms from "@/views/confirms/Confirms";
+import ConfirmDetail from "@/views/confirms/ConfirmDetail";
+import ConfirmsAdjustment from "@/views/confirms/ConfirmsAdjustment";
 
 Vue.use(VueRouter);
 
 const routes = [
     {
         path: '/',
+        redirect: '/sales'
+    },
+    {
+        path: '/login',
         name: 'Login',
-        component: () => import('@/views/Login.vue'),
+        component: Login,
         meta: { bodyClass: 'type-signIn' },
-    },
-    {
-        path: '/confirms',
-        name: 'Confirms',
-        component: () => import('@/views/confirms/Confirms.vue'),
-        meta: { bodyClass: 'type-contents' },
-    },
-    {
-        path: '/confirms/adjustment',
-        name: 'ConfirmsAdjustment',
-        component: () => import('@/views/confirms/ConfirmsAdjustment.vue'),
-        meta: { bodyClass: 'type-contents' },
-    },
-    {
-        path: '/confirms/detail',
-        name: 'ConfirmsDetail',
-        component: () => import('@/views/confirms/ConfirmDetail.vue'),
-        meta: { bodyClass: 'type-contents' },
     },
     {
         path: '/sales',
         name: 'Sales',
-        component: () => import('@/views/sales/Sales.vue'),
+        component: Sales,
         meta: { bodyClass: 'type-contents' },
     },
     {
         path: '/sales/detail',
         name: 'SalesDetail',
-        component: () => import('@/views/sales/SalesDetail.vue'),
+        component: SalesDetail,
         meta: { bodyClass: 'type-contents' },
     },
     {
         path: '/shippings',
         name: 'Shipping',
-        component: () => import('@/views/shippings/Shipping.vue'),
+        component: Shipping,
         meta: { bodyClass: 'type-contents' },
     },
     {
         path: '/shippings/detail',
         name: 'ShippingsDetail',
-        component: () => import('@/views/shippings/ShippingDetail.vue'),
+        component: ShippingDetail,
         meta: { bodyClass: 'type-contents' },
-    }
+    },
+    {
+        path: '/confirms',
+        name: 'Confirms',
+        component: Confirms,
+        meta: { bodyClass: 'type-contents' },
+    },
+    {
+        path: '/confirms/adjustment',
+        name: 'ConfirmsAdjustment',
+        component: ConfirmsAdjustment,
+        meta: { bodyClass: 'type-contents' },
+    },
+    {
+        path: '/confirms/detail',
+        name: 'ConfirmsDetail',
+        component: ConfirmDetail,
+        meta: { bodyClass: 'type-contents' },
+    },
 ];
 
 const router = new VueRouter({
@@ -67,6 +78,13 @@ const vueBodyClass = new VueBodyClass(routes);
 
 
 router.beforeEach(async (to, from, next) => {
+    if(!store.state.user.accessToken) {
+        if(to.name !== 'Login') {
+            await store.dispatch('deleteToken');
+            next('/login');
+            return;
+        }
+    }
     vueBodyClass.guard(to, next);
 })
 

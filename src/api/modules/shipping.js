@@ -8,8 +8,8 @@ function deleteShipping(calDt,nmShop) {
     return http.delete(`/shippings/detail?calDt=${calDt}&nmShop=${nmShop}`);
 }
 
-function registerSale(calDt, frontVideofile){
-    return http.post('/sales', {calDt, frontVideofile})
+function createSipping(shippingInfo){
+    return http.post('/shippings', shippingInfo, { headers: { 'Content-Type': 'multipart/form-data' } })
 }
 
 function fetchShippingDetail(calDt,nmShop) {
@@ -20,6 +20,6 @@ function fetchShippingDetail(calDt,nmShop) {
 export default {
     fetchShippingList,
     deleteShipping,
-    registerSale,
-    fetchShippingDetail
+    createSipping,
+    fetchShippingDetail,
 }

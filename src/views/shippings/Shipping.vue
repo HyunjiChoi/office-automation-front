@@ -15,7 +15,7 @@
           </div>
           <div class="custom-date">
             <div class="ui selection input">
-              <input type="text" name="gender">
+              <input type="text" placeholder="0000-00-00" v-model="inputCalDt">
               <!--              <i class="dropdown icon"></i>-->
               <!--              <div class="default text">-->
               <!--                달력(연월)-->
@@ -33,7 +33,7 @@
           <div class="custom-file">
             <div class="custom-input">
               <div class="ui fluid action input">
-                <input type="file" >
+                <input type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" ref="files">
                 <div class="ui button">
                   파일선택
                 </div>
@@ -55,7 +55,7 @@
                         </ul>-->
           </div>
           <div class="custom-save">
-            <button class="ui primary button">
+            <button class="ui primary button" @click="registerShipping">
               저장
             </button>
           </div>
@@ -121,15 +121,18 @@
 
 <script>
 import {shippingApi} from '@/api';
+import fileMixin from "@/mixins/fileMixin";
 
 export default {
   name: "ShippingsDetail",
+  mixins: [fileMixin],
   created() {
     this.setData()
   },
   data() {
     return {
-      shippingList: null
+      shippingList: null,
+      inputCalDt: '',
     }
   },
   methods: {
@@ -139,6 +142,15 @@ export default {
     },
     parseNmShop(nmShop) {
       return nmShop.split(' ').filter(el => el)
+    },
+    async registerShipping(){
+      const file = this.getFile();
+      if(!file) return;
+      const formData = new FormData();
+      formData.append('calDt', this.inputCalDt);
+      formData.append('frontVideoFile', file);
+      await shippingApi.createSipping(formData);
+      await this.setData();
     }
   }
 }

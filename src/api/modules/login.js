@@ -1,7 +1,7 @@
 import http from '@/util/http'
 
-function login(id,pwd) {
-    return http.post('/login', { id,pwd });
+function login(id, pw) {
+    return http.post('/login', { id, pw });
 }
 
 export default {

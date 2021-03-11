@@ -20,7 +20,7 @@
         </div>
         <div class="custom-input">
           <div class="ui fluid large left icon input">
-            <input type="password" placeholder="Password" v-model="pwd">
+            <input type="password" placeholder="Password" v-model="pw" @keydown.enter="login">
             <i class="lock icon"></i>
           </div>
         </div>
@@ -29,11 +29,11 @@
             LOGIN
           </div>
         </div>
-        <div class="custom-forget">
-          <div class="ui fluid basic button">
-            Forget Username / Password
-          </div>
-        </div>
+<!--        <div class="custom-forget">-->
+<!--          <div class="ui fluid basic button">-->
+<!--            Forget Username / Password-->
+<!--          </div>-->
+<!--        </div>-->
       </main>
     </div>
   </div>
@@ -47,12 +47,19 @@ export default {
   data(){
     return {
       id: '',
-      pwd: ''
+      pw: ''
     }
   },
   methods: {
-    login() {
-      loginApi.login(this.id, this.pwd)
+    async login() {
+      const { data: {success: {accessToken, refreshToken}}} = await loginApi.login(this.id, this.pw);
+      this.$store.commit('setAccessToken', accessToken);
+      localStorage.setItem('accessToken', accessToken);
+      const date = new Date();
+      date.setTime(date.getTime() + 60 * 60 * 60 * 24 * 1000);
+      document.cookie = `refreshToken=${refreshToken};expires=${date.toUTCString()};path=/;`;
+      document.cookie = `keepLogin=1;expires=${date.toUTCString()}`;
+      this.moveMenu('/sales')
     }
   }
 }

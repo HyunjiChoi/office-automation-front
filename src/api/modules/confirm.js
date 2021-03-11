@@ -20,11 +20,15 @@ function fetchConfirmDetail(calDt,nmShop) {
     return http.get(`/confirms/detail?calDt=${calDt}&nmShop=${nmShop}`);
 }
 
+function fetchConfirmsXlsx(calDt, nmShop){
+    return http.get(`/confirms/detail/xlsx?calDt=${calDt}&nmShop=${nmShop}`, {responseType: 'arraybuffer'})
+}
 
 export default {
     fetchConfirmList,
     deleteConfirm,
     fetchConfirmAdjustmentList,
     postConfirmAdjustment,
-    fetchConfirmDetail
+    fetchConfirmDetail,
+    fetchConfirmsXlsx
 }

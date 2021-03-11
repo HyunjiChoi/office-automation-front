@@ -102,8 +102,9 @@ export default {
     },
     async deleteShipping() {
       if (!confirm('삭제하시겠습니까?')) return;
-      const { data } = await shippingApi.deleteShipping(this.calDt, this.nmShop)
-      this.shippingList = data
+      await shippingApi.deleteShipping(this.calDt, this.nmShop)
+      alert('삭제되었습니다.')
+      this.moveMenu('/shippings')
     }
   },
   filters: {
