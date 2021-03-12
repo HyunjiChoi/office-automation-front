@@ -60,7 +60,7 @@
         </table>
       </div>
       <div class="custom-button">
-        <button class="ui primary button"  @click="downExcel">
+        <button class="ui primary button"  @click="downExcel" :disabled="isFetching">
           파일 다운로드
         </button>
       </div>
@@ -82,7 +82,7 @@ export default {
   data() {
     return {
       saleList: null,
-      calDt: ''
+      calDt: '',
     }
   },
   methods: {
@@ -97,7 +97,9 @@ export default {
       this.moveMenu('/sales')
     },
     async downExcel(){
+      this.isFetching = true;
       fileSaver.downloadExcelFile(await saleApi.fetchSalesXlsx(this.calDt), `${this.calDt} 판매관리.xlsx`)
+      this.isFetching = false;
     }
   },
   filters: {

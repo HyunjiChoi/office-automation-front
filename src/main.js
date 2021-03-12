@@ -20,16 +20,21 @@ Vue.config.errorHandler = (err) => {
 
 Vue.prototype.$EventBus = new Vue();
 
-new Vue({
-  router,
-  store,
-  render: h => h(App),
-}).$mount('#app')
-
 Vue.mixin({
+  data(){
+    return {
+      isFetching: false
+    }
+  },
   methods: {
     moveMenu(path) {
       if (this.$route.path !== path) this.$router.push(path);
     }
   }
 })
+
+new Vue({
+  router,
+  store,
+  render: h => h(App),
+}).$mount('#app')

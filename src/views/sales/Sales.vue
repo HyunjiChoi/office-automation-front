@@ -16,7 +16,7 @@
           <div class="custom-title">
             파일 업로드
           </div>
-          <div class="custom-date">
+          <div class="custom-date" v-if="!isFetching">
             <div class="ui selection input">
               <input type="text" placeholder="0000-00-00" v-model="inputCalDt">
 <!--              <i class="dropdown icon"></i>-->
@@ -33,7 +33,7 @@
 <!--              </div>-->
             </div>
           </div>
-          <div class="custom-file">
+          <div class="custom-file" v-if="!isFetching">
             <div class="custom-input">
               <div class="ui fluid action input">
                 <input type="text" v-model="fileName" placeholder="선택된 파일이 없습니다." readonly>
@@ -58,8 +58,13 @@
               </li>
             </ul>-->
           </div>
+          <div class="custom-file" v-else>
+            <div class="custom-title">
+              업로드중입니다..
+            </div>
+          </div>
           <div class="custom-save">
-            <button class="ui primary button" @click="registerSale">
+            <button class="ui primary button" @click="registerSale" :disabled="isFetching">
               저장
             </button>
           </div>
@@ -148,17 +153,30 @@ export default {
       return lnPartner.split(' ').filter(el => el)
     },
     async registerSale(){
-      const file = this.getFile();
-      if(!file || !this.validateDate(this.inputCalDt)) return;
-      const formData = new FormData();
-      formData.append('calDt', this.inputCalDt);
-      formData.append('frontVideoFile', file);
-      const { data } = await saleApi.createSale(formData);
-      this.saleList = data;
-      this.inputCalDt = '';
-      this.$refs.files.value = null;
-      this.getFileName();
+      this.isFetching = true;
+      try {
+        const file = this.getFile();
+        if(!file || !this.validateDate(this.inputCalDt)) return;
+        const formData = new FormData();
+        formData.append('calDt', this.inputCalDt);
+        formData.append('frontVideoFile', file);
+        const { data } = await saleApi.createSale(formData);
+        this.saleList = data;
+        this.inputCalDt = '';
+      } finally {
+        this.isFetching = false;
+        this.$nextTick(() => {
+          this.$refs.files.value = null;
+          this.getFileName();
+        })
+      }
     },
+  },
+  watch: {
+    inputCalDt(val){
+      val = val.replace(/[^0-9]/g, '');
+      this.inputCalDt =  val.replace(/([0-9]{4})([0-9]{2})([0-9]{2})/g, '$1-$2-$3');
+    }
   }
 }
 </script>

@@ -114,7 +114,7 @@
     </section>
     <section class="custom-section">
       <div class="custom-calculate">
-        <button v-on:click="confirm" class="ui huge primary button">
+        <button v-on:click="confirm" class="ui huge primary button" :disabled="isFetching">
           정산
         </button>
       </div>
@@ -154,12 +154,18 @@ export default {
         return;
       }
       if (!confirm('정산하시겠습니까?')) return;
-      const confirmInfo = {
-        calDtSal: this.pickedSale,
-        calDtSh: this.pickedShip.calDt,
-        nmShop: this.pickedShip.nmShop
+      this.isFetching = true;
+      try{
+        const confirmInfo = {
+          calDtSal: this.pickedSale,
+          calDtSh: this.pickedShip.calDt,
+          nmShop: this.pickedShip.nmShop
+        }
+        await confirmApi.postConfirmAdjustment(confirmInfo)
+      }finally {
+        this.isFetching = false;
+        alert('정산되었습니다.')
       }
-      await confirmApi.postConfirmAdjustment(confirmInfo)
       this.moveMenu('/confirms')
     }
   }

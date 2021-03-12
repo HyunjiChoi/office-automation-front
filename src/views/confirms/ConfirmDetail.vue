@@ -74,7 +74,7 @@
         </table>
       </div>
       <div class="custom-button">
-        <button class="ui primary button" @click="downExcel">
+        <button class="ui primary button" @click="downExcel" :disabled="isFetching">
           파일 다운로드
         </button>
       </div>
@@ -98,7 +98,7 @@ export default {
     return {
       confirmList: null,
       calDt: '',
-      nmShop: ''
+      nmShop: '',
     }
   },
   methods: {
@@ -113,7 +113,9 @@ export default {
       this.moveMenu('/confirms')
     },
     async downExcel(){
+      this.isFetching = true;
       fileSaver.downloadExcelFile(await confirmApi.fetchConfirmsXlsx(this.calDt, this.nmShop), `${this.nmShop} 구매확정리스트.xlsx`)
+      this.isFetching = false;
     }
   },
   filters: {

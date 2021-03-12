@@ -25,11 +25,17 @@ http.interceptors.response.use((response) => {
     } = response;
     if(!error) return response;
     switch (code) {
+        case 101:
+            alert('아이디 또는 비밀번호를 확인해주세요.')
+            break;
         case 110:
             store._vm.$EventBus.$emit('sessionExpired');
             break;
         case 401:
             throw new Error(JSON.stringify(error));
+        case 406:
+            alert('같은 날짜에 등록된 내용이 있습니다.\n삭제 후 진행해주세요.')
+            break;
         default:
     }
     throw new Error(error.message);
