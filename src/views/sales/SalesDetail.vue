@@ -106,6 +106,11 @@ export default {
     commaFilter(val) {
       return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
+  },
+  watch: {
+    isFetching(){
+      this.$store.commit('setShowLoader', this.isFetching);
+    }
   }
 }
 </script>

@@ -10,6 +10,7 @@ import ShippingDetail from "@/views/shippings/ShippingDetail";
 import Confirms from "@/views/confirms/Confirms";
 import ConfirmDetail from "@/views/confirms/ConfirmDetail";
 import ConfirmsAdjustment from "@/views/confirms/ConfirmsAdjustment";
+import CompanyMall from "@/views/companyMall/CompanyMall";
 
 Vue.use(VueRouter);
 
@@ -64,6 +65,12 @@ const routes = [
         path: '/confirms/detail',
         name: 'ConfirmsDetail',
         component: ConfirmDetail,
+        meta: { bodyClass: 'type-contents' },
+    },
+    {
+        path: '/company-mall',
+        name: 'CompanyMall',
+        component: CompanyMall,
         meta: { bodyClass: 'type-contents' },
     },
 ];

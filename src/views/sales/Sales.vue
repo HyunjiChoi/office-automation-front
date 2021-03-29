@@ -176,6 +176,9 @@ export default {
     inputCalDt(val){
       val = val.replace(/[^0-9]/g, '');
       this.inputCalDt =  val.replace(/([0-9]{4})([0-9]{2})([0-9]{2})/g, '$1-$2-$3');
+    },
+    isFetching(){
+      this.$store.commit('setShowLoader', this.isFetching);
     }
   }
 }
