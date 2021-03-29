@@ -9,7 +9,7 @@ http.interceptors.request.use((config) => {
     try {
         config.headers = {
             'Content-Type': 'application/json;charset=UTF-8',
-            token: store.getters.accessToken || '',
+            Authorization: store.getters.accessToken || '',
         };
     } catch (e) {
         const error = new axios.Cancel(e.message);
