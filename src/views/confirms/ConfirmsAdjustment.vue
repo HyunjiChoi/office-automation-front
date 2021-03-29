@@ -30,10 +30,10 @@
           </tr>
           </thead>
           <tbody>
-          <tr class="center aligned" v-for="sale in sales" :key="sale.calDt" @click="pickedSale = sale.calDt">
+          <tr class="center aligned" v-for="sale in sales" :key="sale.calDt" @click="pickedSale = sale">
             <td>
               <div class="ui checkbox">
-                <input type="radio" :value="sale.calDt" v-model="pickedSale">
+                <input type="radio" :value="sale" v-model="pickedSale">
                 <label></label>
               </div>
             </td>
@@ -153,11 +153,15 @@ export default {
         alert('정산 할 항목을 선택해 주세요.')
         return;
       }
+      if(!this.pickedSale.lnPartner.includes(this.pickedShip.nmShop)){
+        alert('선택하신 출하리스트의 쇼핑몰이\n판매관리의 쇼핑몰에 포함되어 있지 않습니다.')
+        return;
+      }
       if (!confirm('정산하시겠습니까?')) return;
       this.isFetching = true;
       try{
         const confirmInfo = {
-          calDtSal: this.pickedSale,
+          calDtSal: this.pickedSale.calDt,
           calDtSh: this.pickedShip.calDt,
           nmShop: this.pickedShip.nmShop
         }
@@ -167,6 +171,11 @@ export default {
         alert('정산되었습니다.')
       }
       this.moveMenu('/confirms')
+    }
+  },
+  watch: {
+    isFetching(){
+      this.$store.commit('setShowLoader', this.isFetching);
     }
   }
 }
