@@ -63,7 +63,7 @@ export default {
         if (!file) return;
         const formData = new FormData();
         formData.append('frontVideoFile', file);
-        fileSaver.downloadExcelFile(await companyMallApi.createCompanyMall(formData), '자사몰.xslx');
+        fileSaver.downloadExcelFile(await companyMallApi.createCompanyMall(formData), '자사몰.xlsx');
       } finally {
         this.isFetching = false;
         this.$nextTick(() => {
