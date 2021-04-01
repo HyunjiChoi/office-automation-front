@@ -1,24 +1,17 @@
-# workspace-temp
+# office-automation
 
-## Project setup
-```
-npm install
-```
+보이스캐디 입점 쇼핑몰(7개), 자사몰 더존 ERP 출하리스트 정산 프로젝트 
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+내용 : 엑셀 업로드/다운로드를 통해 입점 쇼핑몰과 더존 ERP 출하리스트를 대조하여 원하는 데이터의 정산 기능을 추가한 사무자동화 프로그램
 
-### Compiles and minifies for production
-```
-npm run build
-```
+프론트엔드 : JavaScript, Vue.js
 
-### Lints and fixes files
-```
-npm run lint
-```
+백엔드 : Java, SPRING Boot
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+DB : eXered, MariaDB
+
+설계 : https://github.com/HyunjiChoi/office-automation.git
+
+프론트엔드 : https://github.com/HyunjiChoi/oa-front.git
+
+백엔드 : https://github.com/HyunjiChoi/oa-server.git
